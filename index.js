@@ -1,10 +1,12 @@
 const Sequelize =require('sequelize');
+const {DataTypes} =Sequelize;
+
 
 const sequelize = new Sequelize('sequelize_video','root', '',{
     dialect: 'mysql',
-    define:{
-        freezeTableName:true
-    }
+    // define:{
+    //     freezeTableName:true
+    // }
 })
 
 // sequelize.sync({force:true});
@@ -55,8 +57,23 @@ const User = sequelize.define('user',{
     timestamps:false
 });
 
-User.sync({force:true}).then((data) => {
-    console.log("Table and model synced successfully!");
+// to access our tables
+// sequelize.models.user
+
+User.sync({alter:true}).then((data) => {
+// console.log("Table and model synced successfully!");
+
+//working with our updated table.
+return User.create({
+    username:"john",
+    password:"123add",
+    age:18
+})
+}).then((data) => {
+    // console.log(data.toJSON()); to get the lastest feed
+    console.log("User added to database");
+
+
 }).catch((err) => {
-    console.log("Error syncing the table and model!");
+    console.log("Error syncing the table and model!",err);
 });
