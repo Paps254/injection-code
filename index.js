@@ -58,7 +58,7 @@ const User = sequelize.define('user',{
 });
 
 // to access our tables
-// sequelize.models.user
+// sequelize.models.user 
 
 User.sync({alter:true}).then((data) => {
 // console.log("Table and model synced successfully!");
@@ -69,10 +69,19 @@ return User.create({
     password:"123add",
     age:18
 })
-}).then((data) => {
-    // console.log(data.toJSON()); to get the lastest feed
-    console.log("User added to database");
+//return User.bulkCreate([{},{}])
 
+
+}).then((data) => {
+    console.log("User added to database");
+    //return data.save({fields:['age']});
+    //data.decrement({age:1});
+    //data.increment({age:1});
+
+
+
+    // console.log(data.toJSON()); to get the lastest feed
+    
 
 }).catch((err) => {
     console.log("Error syncing the table and model!",err);
